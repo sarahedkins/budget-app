@@ -14,7 +14,7 @@ class AdminController {
   }
 }
 
-angular.module('gameApp.admin')
+angular.module('budgetApp.admin')
   .controller('AdminController', AdminController);
 
 })();

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gameApp.admin')
+angular.module('budgetApp.admin')
   .config(function($stateProvider) {
     $stateProvider
       .state('admin', {

@@ -2,10 +2,20 @@
 
 class NavbarController {
   //start-non-standard
-  menu = [{
+  menu = [
+  {
     'title': 'Home',
     'state': 'main'
-  }];
+  },
+  {
+    'title': 'Bank',
+    'state': 'bank'
+  },
+  {
+    'title': 'Budget',
+    'state': 'budget'
+  }
+];
 
   isCollapsed = true;
   //end-non-standard
@@ -17,5 +27,5 @@ class NavbarController {
   }
 }
 
-angular.module('gameApp')
+angular.module('budgetApp')
   .controller('NavbarController', NavbarController);

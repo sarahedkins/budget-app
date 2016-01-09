@@ -29,5 +29,5 @@ class LoginController {
   }
 }
 
-angular.module('gameApp')
+angular.module('budgetApp')
   .controller('LoginController', LoginController);

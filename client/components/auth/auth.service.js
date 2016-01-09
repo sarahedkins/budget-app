@@ -183,7 +183,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
   return Auth;
 }
 
-angular.module('gameApp.auth')
+angular.module('budgetApp.auth')
   .factory('Auth', AuthService);
 
 })();

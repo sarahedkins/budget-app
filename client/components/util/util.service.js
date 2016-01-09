@@ -59,7 +59,7 @@ function UtilService($window) {
   return Util;
 }
 
-angular.module('gameApp.util')
+angular.module('budgetApp.util')
   .factory('Util', UtilService);
 
 })();

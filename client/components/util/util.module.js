@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('gameApp.util', []);
+angular.module('budgetApp.util', []);

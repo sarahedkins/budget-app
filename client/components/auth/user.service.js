@@ -21,7 +21,7 @@ function UserResource($resource) {
   });
 }
 
-angular.module('gameApp.auth')
+angular.module('budgetApp.auth')
   .factory('User', UserResource);
 
 })();

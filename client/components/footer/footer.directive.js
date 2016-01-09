@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gameApp')
+angular.module('budgetApp')
   .directive('footer', function () {
     return {
       templateUrl: 'components/footer/footer.html',

@@ -26,7 +26,7 @@ function authInterceptor($rootScope, $q, $cookies, $injector, Util) {
   };
 }
 
-angular.module('gameApp.auth')
+angular.module('budgetApp.auth')
   .factory('authInterceptor', authInterceptor);
 
 })();

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('gameApp.auth', [
-  'gameApp.constants',
-  'gameApp.util',
+angular.module('budgetApp.auth', [
+  'budgetApp.constants',
+  'budgetApp.util',
   'ngCookies',
   'ui.router'
 ])

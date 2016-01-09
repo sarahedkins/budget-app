@@ -25,5 +25,5 @@ class SettingsController {
   }
 }
 
-angular.module('gameApp')
+angular.module('budgetApp')
   .controller('SettingsController', SettingsController);

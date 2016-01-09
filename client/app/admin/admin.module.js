@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gameApp.admin', [
-  'gameApp.auth',
+angular.module('budgetApp.admin', [
+  'budgetApp.auth',
   'ui.router'
 ]);

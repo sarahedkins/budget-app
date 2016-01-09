@@ -39,5 +39,5 @@ class SignupController {
   }
 }
 
-angular.module('gameApp')
+angular.module('budgetApp')
   .controller('SignupController', SignupController);

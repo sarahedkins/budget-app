@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gameApp')
+angular.module('budgetApp')
   .directive('navbar', () => ({
     templateUrl: 'components/navbar/navbar.html',
     restrict: 'E',
