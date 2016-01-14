@@ -1,7 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
-import Bank from './bank.model';
+import Account from './account.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -50,43 +50,43 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Banks
+// Gets a list of Accounts
 export function index(req, res) {
-  Bank.findAsync()
+  Account.findAsync()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Bank from the DB
+// Gets a single Account from the DB
 export function show(req, res) {
-  Bank.findByIdAsync(req.params.id)
+  Account.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new Bank in the DB
+// Creates a new Account in the DB
 export function create(req, res) {
-  Bank.createAsync(req.body)
+  Account.createAsync(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Updates an existing Bank in the DB
+// Updates an existing Account in the DB
 export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Bank.findByIdAsync(req.params.id)
+  Account.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes a Bank from the DB
+// Deletes a Account from the DB
 export function destroy(req, res) {
-  Bank.findByIdAsync(req.params.id)
+  Account.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
