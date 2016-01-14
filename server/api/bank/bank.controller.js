@@ -57,9 +57,9 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-// Gets a single Account from the DB
+// Gets all Accounts with given owner ID from the DB
 export function show(req, res) {
-  Account.findByIdAsync(req.params.id)
+  Account.find({ owner: req.params.id})
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));

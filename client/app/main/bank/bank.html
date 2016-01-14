@@ -2,24 +2,57 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Bank</h1>
+    <h1>{{ total | currency }}</h1>
     <p class="lead">This is what you've got.</p>
     <img width="200" src="assets/images/pinkpigicon.png" alt="pink pig icon">
   </div>
 </header>
 
-<div>
-  <form>
-    <input> </input>
-  </form>
-</div>
+<ul>
+  <li class="accounts-list">
+    <div class="row">
+      <div class="col-lg-3">Name:</div>
+      <div class="col-lg-3">Type:</div>
+      <div class="col-lg-3">Amount:</div>
+      <div class="col-lg-3"> </div>
+    </div>
+  </li>
+  <li class="accounts-list" ng-repeat="account in accounts">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">{{ account.name }}</div>
+        <div class="col-lg-3">{{ account.type }}</div>
+        <div class="col-lg-3 accounts-list-amount">{{ account.amount }}</div>
+        <div class="col-lg-3"><a ng-click="delete($index, account._id)"><span class="glyphicon glyphicon-remove"></span></a></div>
+      </div>
+    </div>
+  </li>
+</ul>
 
+<br>
+<div class="totals">
+  <p>Total in the bank: {{ total }}</p>
 <div>
-  <!-- This will be an ng-repeat over all the accounts for the user. -->
-  <p>TESTING ANGULAR: {{ isitangular }}</p>
-  <p>Savings Account: {{ savings }} </p>
-  <p>Checking Account: {{ checking }} </p>
-  <p>Credit Account: {{ creditdebt }} </p>
+
+<br>
+<hr>
+<br>
+
+<div class="container">
+  <h5>Add a new account to your bank: </h5>
+  <form>
+    <label>Name:</label><input ng-model="newAccount.name"> </input>
+    <label>Type:</label>
+    <select ng-model="newAccount.type">
+      <option value="Savings">Savings</option>
+      <option value="Checking">Checking</option>
+      <option value="Credit">Credit Card</option>
+      <option value="Loan">Loan</option>
+      <option value="Other">Other</option>
+    </select>
+    <label>Amount:</label><input ng-model="newAccount.amount"> </input>
+    <input type="submit" ng-click="createAccount(newAccount)" value="Submit" />
+  </form>
 </div>
 
 <footer></footer>
