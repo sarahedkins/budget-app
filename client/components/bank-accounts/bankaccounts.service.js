@@ -15,6 +15,11 @@ angular.module('budgetApp')
       return $http.get('/api/bank/' + currentUser._id);
     }
 
+    // Update account
+    accounts.updateAccount = function(updatedAcc) {
+      return $http.put('/api/bank/' + updatedAcc._id, updatedAcc)
+    }
+
     // Delete an account by its id
     accounts.deleteAccountById = function(id) {
       return $http.delete('/api/bank/' + id);
