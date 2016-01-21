@@ -1,3 +1,53 @@
+// color descriptive variables:
+$dollargreen: #90a97e;
+$cornsilk: 	#FFF8DC;
+$piggie: #e7c4e5;
+$black: #000000;
+$softred: #E47575;
+$darkred: #8A1815;
+$balletpink: #F1C6C6;
+
+// color functional variables:
+$dark_text_color: $black;
+$light_text_color: $cornsilk;
+$link_color: $balletpink;
+$background_color: $dollargreen;
+
+// navbar colors
+$nav_background_color: $cornsilk;
+$nav_text_color: $balletpink;
+$nav_active_tab_color: $balletpink;
+$nav_active_tab_text_color: $cornsilk;
+
+.navbar-default .navbar-brand {
+    color: $black;
+}
+
+.navbar-text {
+  margin-left: 15px;
+  color: $nav_text_color;
+}
+
+.navbar {
+  background-color: $nav_background_color;
+}
+
+.navbar-default
+.navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: $nav_active_tab_color;
+  color: $nav_active_tab_text_color;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: $nav_background_color;
+}
+
+.navbar-default {
+  border-color: $background_color;
+}
+
 .thing-form {
   margin: 20px 0;
 }
@@ -16,14 +66,10 @@
 .hero-unit {
   position: relative;
   padding: 30px 15px;
-  color: #F5F5F5;
+  color: $light_text_color;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #888888;
-}
-
-.navbar-text {
-  margin-left: 15px;
+  background: $background_color;
 }
 
 
@@ -46,4 +92,16 @@
 
 input[type="number"] {
    width: 200px;
+}
+
+a {
+  color: $link_color;
+}
+
+.please-log-in {
+  background-color: $background_color;
+  font-size: 25px;
+  font-weight: bold;
+  color: $light_text_color;
+  text-align: center;
 }

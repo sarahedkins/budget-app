@@ -12,6 +12,7 @@ angular.module('budgetApp')
 
     // Retrieve all accounts owned by the user.
     accounts.getUsersAccounts = function() {
+      console.log("currentUser._id is", currentUser._id);
       return $http.get('/api/bank/' + currentUser._id);
     }
 

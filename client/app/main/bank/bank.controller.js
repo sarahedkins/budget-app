@@ -1,12 +1,20 @@
 angular.module('budgetApp')
-  .controller('BankController', function($scope, BankAccountFactory){
+  .controller('BankController', function($scope, Auth, BankAccountFactory){
 
-    BankAccountFactory.getUsersAccounts()
-      .then(function(res){
-        $scope.accounts = res.data;
-        $scope.total = sumAmounts(res.data);
-        updateGraphic($scope.accounts);
-      })
+    $scope.isLoggedIn = Auth.isLoggedIn;
+
+    if(Auth.isLoggedIn()){
+      console.log("LOGGED IN!", $scope.isLoggedIn());
+      BankAccountFactory.getUsersAccounts()
+        .then(function(res){
+          $scope.accounts = res.data;
+          console.log("res.data", res.data);
+          $scope.total = sumAmounts(res.data);
+          updateGraphic($scope.accounts);
+        })
+    } else {
+      console.log("NOT LOGGED IN!", $scope.isLoggedIn());
+    }
 
       $scope.createAccount = function(accountInfo) {
         $scope.newAccount = {};
@@ -39,6 +47,7 @@ angular.module('budgetApp')
         BankAccountFactory.updateAccount(accObj)
           .then(function(res){
             // Update total
+            console.log("$scope.accounts", $scope.accounts);
             $scope.total = sumAmounts($scope.accounts);
             accObj.editing = false;
           })
@@ -67,6 +76,7 @@ angular.module('budgetApp')
     var updateGraphic = function(accounts) {
       console.log("sumAmounts($scope.accounts).toFixed(2)", sumAmounts($scope.accounts).toFixed(2));
       var circle = d3.selectAll("circle");
+      console.log("$scope.accounts in updateGraphic", $scope.accounts);
       circle.data(sumAmounts($scope.accounts).toFixed(2));
       circle.attr("r", function(d) {
        return d * 10;

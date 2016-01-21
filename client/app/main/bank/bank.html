@@ -1,77 +1,87 @@
 <navbar></navbar>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>{{ total | currency }}</h1>
-    <p class="lead">This is what you've got.</p>
-    <img width="200" src="assets/images/pinkpigicon.png" alt="pink pig icon">
-    <br>
-    <svg>
-      <circle cx="100" cy="100" r="10" fill="pink"></circle>
-    </svg>
-  </div>
+<div ng-show="isLoggedIn()">
 
-</header>
-
-<ul>
-  <div class="container">
-  <li class="accounts-list">
-    <div class="row">
-      <div class="col-lg-3">Account:</div>
-      <div class="col-lg-3">Type:</div>
-      <div class="col-lg-3">Amount:</div>
-      <div class="col-lg-3"> </div>
+  <header class="hero-unit" id="banner">
+    <div class="container">
+      <h1>{{ total | currency }}</h1>
+      <p class="lead">This is what you've got.</p>
+      <img width="200" src="assets/images/pinkpigicon.png" alt="pink pig icon">
+      <br>
+      <svg>
+        <circle cx="100" cy="100" r="10" fill="pink"></circle>
+      </svg>
     </div>
-  </li>
-  <li class="accounts-list" ng-repeat="account in accounts">
+
+  </header>
+
+  <ul>
+    <div class="container">
+    <li class="accounts-list">
       <div class="row">
-          <div class="col-lg-3">{{ account.name }}</div>
-          <div class="col-lg-3">{{ account.type }}</div>
-        <div ng-hide="account.editing">
-          <div class="col-lg-3 accounts-list-amount">{{ account.amount | currency }}</div>
-          <div class="col-lg-3">
-            <a ng-click="delete($index, account._id)" title="Delete account forever"><span class="glyphicon glyphicon-remove"></span></a>
-            <a ng-click="editAccount(account)" title="Edit account"><span class="glyphicon glyphicon-pencil"></span></a>
-          </div>
-        </div>
-        <div ng-show="account.editing">
-          <div class="col-lg-3 accounts-list-amount">
-            <input  type="number" step="0.01" value="{{account.amount}}" ng-model="newAmt">
-          </div>
-          <div class="col-lg-3">
-          <a ng-click="update(account, newAmt)" title="Save changes"><span class="glyphicon glyphicon-check"></span></a>
-          <a ng-click="revert(account)" title="Revert"><span class="glyphicon glyphicon-ban-circle"></span></a>
-          </div>
-        </div>
+        <div class="col-lg-3">Account:</div>
+        <div class="col-lg-3">Type:</div>
+        <div class="col-lg-3">Amount:</div>
+        <div class="col-lg-3"> </div>
       </div>
-  </li>
+    </li>
+    <li class="accounts-list" ng-repeat="account in accounts">
+        <div class="row">
+            <div class="col-lg-3">{{ account.name }}</div>
+            <div class="col-lg-3">{{ account.type }}</div>
+          <div ng-hide="account.editing">
+            <div class="col-lg-3 accounts-list-amount">{{ account.amount | currency }}</div>
+            <div class="col-lg-3">
+              <a ng-click="delete($index, account._id)" title="Delete account forever"><span class="glyphicon glyphicon-remove"></span></a>
+              <a ng-click="editAccount(account)" title="Edit account"><span class="glyphicon glyphicon-pencil"></span></a>
+            </div>
+          </div>
+          <div ng-show="account.editing">
+            <div class="col-lg-3 accounts-list-amount">
+              <input  type="number" step="0.01" value="{{account.amount}}" ng-model="newAmt">
+            </div>
+            <div class="col-lg-3">
+            <a ng-click="update(account, newAmt)" title="Save changes"><span class="glyphicon glyphicon-check"></span></a>
+            <a ng-click="revert(account)" title="Revert"><span class="glyphicon glyphicon-ban-circle"></span></a>
+            </div>
+          </div>
+        </div>
+    </li>
+    </div>
+  </ul>
+
+  <br>
+  <div class="totals">
+    <p>Total in the bank: {{ total | currency }}</p>
   </div>
-</ul>
 
-<br>
-<div class="totals">
-  <p>Total in the bank: {{ total | currency }}</p>
-<div>
+  <br>
+  <hr>
+  <br>
 
-<br>
-<hr>
-<br>
+  <div class="container">
+    <h5>Add a new account to your bank: </h5>
+    <form>
+      <label>Name:</label><input ng-model="newAccount.name">
+      <label>Type:</label>
+      <select ng-model="newAccount.type">
+        <option value="Savings">Savings</option>
+        <option value="Checking">Checking</option>
+        <option value="Credit">Credit Card</option>
+        <option value="Loan">Loan</option>
+        <option value="Other">Other</option>
+      </select>
+      <label>Amount:</label><input ng-model="newAccount.amount" type="number" step="0.01">
+      <input type="submit" ng-click="createAccount(newAccount)" value="Submit">
+    </form>
+  </div>
 
-<div class="container">
-  <h5>Add a new account to your bank: </h5>
-  <form>
-    <label>Name:</label><input ng-model="newAccount.name">
-    <label>Type:</label>
-    <select ng-model="newAccount.type">
-      <option value="Savings">Savings</option>
-      <option value="Checking">Checking</option>
-      <option value="Credit">Credit Card</option>
-      <option value="Loan">Loan</option>
-      <option value="Other">Other</option>
-    </select>
-    <label>Amount:</label><input ng-model="newAccount.amount" type="number" step="0.01">
-    <input type="submit" ng-click="createAccount(newAccount)" value="Submit">
-  </form>
+</div>
+
+<div ng-show="!isLoggedIn()">
+  <div class="container">
+  <p class="please-log-in"> Top Secret! Please <a ui-sref="login">log in</a> to view your finances. </p>
+  </div>
 </div>
 
 <footer></footer>
