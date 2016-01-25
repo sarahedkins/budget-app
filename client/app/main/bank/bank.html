@@ -2,6 +2,7 @@
 
 <div ng-show="isLoggedIn()">
 
+  <div ng-show="hasAccounts()">
   <header class="hero-unit" id="banner">
     <div class="container">
       <h1>{{ getTotal() | currency }}</h1>
@@ -58,7 +59,13 @@
   <br>
   <hr>
   <br>
+</div>
 
+<div ng-show="!hasAccounts()">
+  <div class="container">
+  <p class="please-log-in"> No accounts. Start making bank! </p>
+  </div>
+</div>
   <div class="container">
     <h5>Add a new account to your bank: </h5>
     <form>

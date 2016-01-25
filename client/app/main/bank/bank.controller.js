@@ -12,7 +12,14 @@ angular.module('budgetApp')
       }
     }
 
-    console.log("In the bank controller!!");
+    // If user is logged in, get accounts from BACK-END
+    if(Auth.isLoggedIn()){
+        BankAccountFactory.getUsersAccounts(Auth.getCurrentUser()._id);
+    } else {
+      // else, user is not logged in so just make sure accounts is cleared
+      BankAccountFactory.deleteStoredAccounts();
+    }
+
 
   //  updateGraphic($scope.accounts);
 
