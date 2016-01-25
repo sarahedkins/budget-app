@@ -3,7 +3,7 @@
 (function() {
 
 class MainController {
-  constructor($http) {
+  constructor($http, Auth, BankAccountFactory) {
     this.$http = $http;
     this.awesomeThings = [];
 

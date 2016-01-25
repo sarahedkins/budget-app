@@ -13,10 +13,11 @@ angular.module('budgetApp')
         url: '/logout?referrer',
         referrer: 'main',
         template: '',
-        controller: function($state, Auth) {
+        controller: function($state, Auth, BankAccountFactory) {
           var referrer = $state.params.referrer ||
                           $state.current.referrer ||
                           'main';
+          BankAccountFactory.deleteStoredAccounts();
           Auth.logout();
           $state.go(referrer);
         }

@@ -4,7 +4,7 @@
 
   <header class="hero-unit" id="banner">
     <div class="container">
-      <h1>{{ total | currency }}</h1>
+      <h1>{{ getTotal() | currency }}</h1>
       <p class="lead">This is what you've got.</p>
       <img width="200" src="assets/images/pinkpigicon.png" alt="pink pig icon">
       <br>
@@ -25,7 +25,7 @@
         <div class="col-lg-3"> </div>
       </div>
     </li>
-    <li class="accounts-list" ng-repeat="account in accounts">
+    <li class="accounts-list" ng-repeat="account in getAccounts()">
         <div class="row">
             <div class="col-lg-3">{{ account.name }}</div>
             <div class="col-lg-3">{{ account.type }}</div>
@@ -52,7 +52,7 @@
 
   <br>
   <div class="totals">
-    <p>Total in the bank: {{ total | currency }}</p>
+    <p>Total in the bank: {{ getTotal() | currency }}</p>
   </div>
 
   <br>

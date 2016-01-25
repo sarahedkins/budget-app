@@ -1,20 +1,20 @@
 angular.module('budgetApp')
-  .controller('BankController', function($scope, Auth, BankAccountFactory){
+  .controller('BankController', function($scope, Auth, BankAccountFactory, User){
 
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.hasAccounts = BankAccountFactory.hasAccounts;
+    $scope.getAccounts = BankAccountFactory.getAccounts;
 
-    if(Auth.isLoggedIn()){
-      console.log("LOGGED IN!", $scope.isLoggedIn());
-      BankAccountFactory.getUsersAccounts()
-        .then(function(res){
-          $scope.accounts = res.data;
-          console.log("res.data", res.data);
-          $scope.total = sumAmounts(res.data);
-          updateGraphic($scope.accounts);
-        })
-    } else {
-      console.log("NOT LOGGED IN!", $scope.isLoggedIn());
+    $scope.getTotal = function() {
+      var accs = BankAccountFactory.getAccounts();
+      if (accs) {
+              return sumAmounts(accs);
+      }
     }
+
+    console.log("In the bank controller!!");
+
+  //  updateGraphic($scope.accounts);
 
       $scope.createAccount = function(accountInfo) {
         $scope.newAccount = {};
@@ -47,7 +47,6 @@ angular.module('budgetApp')
         BankAccountFactory.updateAccount(accObj)
           .then(function(res){
             // Update total
-            console.log("$scope.accounts", $scope.accounts);
             $scope.total = sumAmounts($scope.accounts);
             accObj.editing = false;
           })
@@ -57,15 +56,18 @@ angular.module('budgetApp')
         accObj.editing = false;
       }
 
-      var sumAmounts = function(listOfAccounts) {
-        return listOfAccounts.map(function(elem){
-          return elem.amount;
-        }).reduce(function(prev, curr){
-              return prev + curr;
-        });
+      function sumAmounts(listOfAccounts) {
+        if(listOfAccounts.length == 0) return;
+        else {
+          return listOfAccounts.map(function(elem){
+            return elem.amount;
+          }).reduce(function(prev, curr){
+                return prev + curr;
+          });
+        }
       }
 
-      var listOfAmounts = function(listOfAccounts) {
+      function listOfAmounts(listOfAccounts) {
         return listOfAccounts.map(function(elem){
           return elem.amount;
         });
@@ -73,14 +75,14 @@ angular.module('budgetApp')
 
 
     // D3 Stuff
-    var updateGraphic = function(accounts) {
-      console.log("sumAmounts($scope.accounts).toFixed(2)", sumAmounts($scope.accounts).toFixed(2));
-      var circle = d3.selectAll("circle");
-      console.log("$scope.accounts in updateGraphic", $scope.accounts);
-      circle.data(sumAmounts($scope.accounts).toFixed(2));
-      circle.attr("r", function(d) {
-       return d * 10;
-      });
-    }
+    // function updateGraphic(accounts) {
+    //   console.log("sumAmounts($scope.accounts).toFixed(2)", sumAmounts($scope.accounts).toFixed(2));
+    //   var circle = d3.selectAll("circle");
+    //   console.log("$scope.accounts in updateGraphic", $scope.accounts);
+    //   circle.data(sumAmounts($scope.accounts).toFixed(2));
+    //   circle.attr("r", function(d) {
+    //    return d * 10;
+    //   });
+    // }
 
   });

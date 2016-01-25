@@ -1,30 +1,50 @@
 angular.module('budgetApp')
   .factory("BankAccountFactory", function($http, Auth){
-    var accounts = {};
-    var currentUser = Auth.getCurrentUser();
+    var userAccounts = [];
+    var accountService = {};
 
+    // BACK-END //
     // Create and save a new account
-    accounts.saveAccount = function(accInfo) {
+    accountService.saveAccount = function(accInfo) {
       // Expect accInfo to be an object with name, type, amount
-      accInfo.owner = currentUser._id; // append current user id as owner to account object
-      return $http.post('/api/bank', accInfo);
+        accInfo.owner = Auth.getCurrentUser()._id; // append current user id as owner to account object
+        return $http.post('/api/bank', accInfo);
     }
 
-    // Retrieve all accounts owned by the user.
-    accounts.getUsersAccounts = function() {
-      console.log("currentUser._id is", currentUser._id);
-      return $http.get('/api/bank/' + currentUser._id);
+    // Retrieve all accounts owned by the user from backend.
+    accountService.getUsersAccounts = function(userId) {
+      return $http.get('/api/bank/' + userId)
+      .then(function(res){
+        userAccounts = res.data;
+        return userAccounts;
+      });
     }
 
     // Update account
-    accounts.updateAccount = function(updatedAcc) {
+    accountService.updateAccount = function(updatedAcc) {
       return $http.put('/api/bank/' + updatedAcc._id, updatedAcc)
     }
 
     // Delete an account by its id
-    accounts.deleteAccountById = function(id) {
+    accountService.deleteAccountById = function(id) {
       return $http.delete('/api/bank/' + id);
     }
 
-    return accounts;
+    // FRONT-END //
+    // Check if user has any accounts
+    accountService.hasAccounts = function() {
+      return userAccounts.length > 0;
+    }
+
+    // Retrieve all user's accounts on front-end
+    accountService.getAccounts = function() {
+      return userAccounts;
+    }
+
+    // Delete all user's accounts from the singleton
+    accountService.deleteStoredAccounts = function() {
+      userAccounts = [];
+    }
+
+    return accountService;
   })
