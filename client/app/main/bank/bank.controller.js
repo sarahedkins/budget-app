@@ -54,7 +54,6 @@ angular.module('budgetApp')
         BankAccountFactory.updateAccount(accObj)
           .then(function(res){
             // Update total
-            $scope.total = sumAmounts($scope.accounts);
             accObj.editing = false;
           })
       }
