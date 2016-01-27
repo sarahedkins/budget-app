@@ -79,16 +79,4 @@ angular.module('budgetApp')
         });
       }
 
-
-    // D3 Stuff
-    // function updateGraphic(accounts) {
-    //   console.log("sumAmounts($scope.accounts).toFixed(2)", sumAmounts($scope.accounts).toFixed(2));
-    //   var circle = d3.selectAll("circle");
-    //   console.log("$scope.accounts in updateGraphic", $scope.accounts);
-    //   circle.data(sumAmounts($scope.accounts).toFixed(2));
-    //   circle.attr("r", function(d) {
-    //    return d * 10;
-    //   });
-    // }
-
   });

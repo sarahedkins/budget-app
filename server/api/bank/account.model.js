@@ -7,8 +7,7 @@ var AccountSchema = new mongoose.Schema({
   type: String,  // Savings, Checking, Credit, Loan, Other,
   rate: Number, // if Loan, provide interest rate
   amount: Number, // Negative numbers reflect debt such as in Credit and Loans
-  owner: String
-  // { type: Schema.Types.ObjectId, ref: 'User' }
+  owner: String // { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 export default mongoose.model('Account', AccountSchema);
