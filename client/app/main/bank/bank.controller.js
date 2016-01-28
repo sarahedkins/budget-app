@@ -4,6 +4,8 @@ angular.module('budgetApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.hasAccounts = BankAccountFactory.hasAccounts;
     $scope.getAccounts = BankAccountFactory.getAccounts;
+    $scope.addAccount = BankAccountFactory.addAccount;
+    $scope.removeAccount = BankAccountFactory.removeAccount;
 
     $scope.getTotal = function() {
       var accs = BankAccountFactory.getAccounts();
@@ -26,18 +28,18 @@ angular.module('budgetApp')
       $scope.createAccount = function(accountInfo) {
         $scope.newAccount = {};
         BankAccountFactory.saveAccount(accountInfo)
-          .then(function(acc){
-            $scope.accounts.push(acc.data);
-            $scope.total += acc.data.amount;
+          .then(function(res){
+            $scope.addAccount(res.data);
+            $scope.total += res.data.amount;
           })
       }
 
       $scope.delete = function(index, id) {
         BankAccountFactory.deleteAccountById(id)
-          .then(function(acc){
+          .then(function(res){
             // Update view by removing the deleted account.
-            $scope.accounts.splice(index, 1);
-            $scope.total -= acc.amount;
+            $scope.removeAccount(index);
+            $scope.total -= res.data.amount;
           })
       }
 

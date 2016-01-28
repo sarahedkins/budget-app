@@ -1,6 +1,6 @@
 angular.module('budgetApp')
   .factory("BankAccountFactory", function($http, Auth){
-    var userAccounts = [];
+    var userAccounts = [];  // local cache of accounts
     var accountService = {};
 
     // BACK-END //
@@ -36,9 +36,23 @@ angular.module('budgetApp')
       return userAccounts.length > 0;
     }
 
-    // Retrieve all user's accounts on front-end
+    // Retrieve all user's accounts cached on front-end
     accountService.getAccounts = function() {
       return userAccounts;
+    }
+
+    // Add an account to the front-end cache
+    accountService.addAccount = function(newAcc) {
+      if (newAcc) {
+        userAccounts.push(newAcc);
+      }
+    }
+
+    // Remove an account from the front-end cache
+    accountService.removeAccount = function(index) {
+      if (index) {
+        userAccounts.splice(index, 1);
+      }
     }
 
     // Delete all user's accounts from the singleton
