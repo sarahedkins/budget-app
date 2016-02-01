@@ -1,3 +1,3 @@
-<div class="container">
-  <p> Top Secret! Please <a ui-sref="login">log in</a> to view your finances. </p>
+<div class="container" ng-show="!isLoggedIn()">
+<p> Top Secret! Please <a ui-sref="login">log in</a> to view your finances. </p>
 </div>

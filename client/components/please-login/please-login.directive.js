@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('budgetApp')
-  .directive('pleaseLogin', function () {
+  .directive('pleaseLogin', ['Auth', function (Auth) {
     return {
       templateUrl: 'components/please-login/please-login.html',
       restrict: 'E',
       link: function(scope, element) {
-        element.children().addClass('please-login');
+        scope.isLoggedIn = Auth.isLoggedIn;
+        element.addClass('please-login');
       }
     };
-  });
+  }]);
